@@ -19,7 +19,9 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x = this.x + (this.speed*dt);
-    this.collosion()
+    this.collosion();
+    if(this.x > 505)
+        this.reset();
 };
 Enemy.prototype.collosion = function() {
     // You should multiply any movement by the dt parameter
@@ -37,6 +39,13 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// rest the postion of the enemy
+Enemy.prototype.reset = function() {
+    this.row = Math.floor((Math.random() * 3));
+    this.speed = Math.floor((Math.random()*100)+40);
+    this.x = -100;
+    this.y = 65 + (80*this.row);
+};
 // Now write your own player class
 var Player = function()
 {
@@ -113,19 +122,11 @@ document.addEventListener('keyup', function(e) {
 });
 
 // generate enemies
-function gameLoop()
+function createEnemies()
 {
-    var enemy = new Enemy(Math.floor((Math.random() * 3)), Math.floor((Math.random()*100)+40));
-    allEnemies.push(enemy);
-    // check if outside of the canvas
-    for(var i=0; i<allEnemies.length; i++)
-    {
-        if(allEnemies[i].x > 505){
-            allEnemies.splice(i,1);
-        }
+    for(var i=0 ; i<5 ; i++){
+        var enemy = new Enemy(Math.floor((Math.random() * 3)), Math.floor((Math.random()*100)+40));
+        allEnemies.push(enemy);
     }
-//    console.log(allEnemies);
-    setTimeout(gameLoop, 1000 *Math.floor(Math.random() * 5));
 }
-
-setTimeout(gameLoop, 1000);
+createEnemies();
