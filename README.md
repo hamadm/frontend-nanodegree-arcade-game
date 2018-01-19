@@ -10,9 +10,13 @@ open the index file in your browser and start playing
 
 ## How to play:
 Use the keyboard keys to play the game:
+
 **up** to move the player forward
+
 **down** to move the player backword
+
 **right** to move the player to the right
+
 **left** to move the player to the left
 
 ## Licence:
